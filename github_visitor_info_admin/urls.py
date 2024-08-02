@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path,include
 
 urlpatterns = [
-    path('dj=admin/', admin.site.urls),
+    path('dj-admin/', admin.site.urls),
     path('', include('redirection.urls')),
     path('auth/', include('auth1.urls')),
 ]
