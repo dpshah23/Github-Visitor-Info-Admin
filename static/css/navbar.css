@@ -1,55 +1,36 @@
-/* Default styles for navbar */
-.navbar {
-    background-color: #ffffff;
-    color: #000000;
-    /* Add other styles as needed */
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
 }
 
-/* Media query for small screens */
-@media (max-width: 768px) {
-    .navbar {
-        /* Adjust styles for small screens */
-    }
+.navbar{
+    background-color: #333;
+    color: black;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
-/* Media query for medium screens */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .navbar {
-        /* Adjust styles for medium screens */
-    }
+.navbar a{
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
 }
 
-/* Media query for large screens */
-@media (min-width: 1025px) {
-    .navbar {
-        /* Adjust styles for large screens */
-    }
+.navbar a:hover{
+    color: black;
 }
 
-/* Dark theme styles */
-.navbar.dark {
-    background-color: #000000;
-    color: #ffffff;
-    /* Add other styles for dark theme */
+.navbar a.active{
+    color: white;
 }
 
-/* Media query for dark theme on small screens */
-@media (max-width: 768px) {
-    .navbar.dark {
-        /* Adjust styles for dark theme on small screens */
-    }
-}
-
-/* Media query for dark theme on medium screens */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .navbar.dark {
-        /* Adjust styles for dark theme on medium screens */
-    }
-}
-
-/* Media query for dark theme on large screens */
-@media (min-width: 1025px) {
-    .navbar.dark {
-        /* Adjust styles for dark theme on large screens */
-    }
+.navbar-menu{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    font-size: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0; 
 }
