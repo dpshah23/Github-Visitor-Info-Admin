@@ -11,10 +11,17 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 from django.utils import timezone
 from datetime import timedelta
+import random
+import string
 
 # Create your views here.
 
 def validate(request):
+    if 'email12' not in request.session:
+        messages.error(request,'Session Expired')
+        return redirect('/auth/login/')
+    
+
     if request.method=="POST":
         otp1=request.POST.get('o1')
         otp2=request.POST.get('o2')
@@ -78,6 +85,7 @@ def login(request):
     if request.method=="POST":
         email=request.POST.get('email')
         password=request.POST.get('password')
+        print(email,password)
 
         try:
             user=Users_main.objects.get(email=email)
@@ -193,3 +201,23 @@ def logout(request):
     request.session.pop('github_username')
     request.session.flush()
     return response
+
+def signup(request):
+    if request.method=="POST":
+        email=request.POST.get('email')
+        password=request.POST.get('password')
+        github_username=request.POST.get('username')
+        try:
+            user=Users_main.objects.get(email=email)
+            messages.error(request,'User already exists')
+            return redirect('/auth/login/')
+        except Users_main.DoesNotExist:
+            unique_link=x = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(50))
+            user=Users_main(email=email,github_username=github_username,unique_link=unique_link)
+            user.set_password(password)
+            user.save()
+            messages.success(request,'User Created Successfully')
+            return redirect('/auth/login/')
+        
+        
+    return render(request,'signup.html')

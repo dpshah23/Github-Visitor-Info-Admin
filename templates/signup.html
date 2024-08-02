@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Signup {% endblock title %}
+{% block body %}
+<link rel="stylesheet" href="/static/css/signup.css">
+{% if messages %}
+  {% for message in messages %}
+    <div class="custom-alert custom-alert-{{ message.tags }}">
+      {{ message }}
+      <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+    </div>
+  {% endfor %}
+{% endif %}
+
+<link rel="stylesheet" href="/static/css/Sign-up.css">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+<section class="container">
+    <form id="signupForm" action="" method="post" onsubmit="return validateForm()">
+        <div class="form-content">
+            <header>Sign-Up</header>
+            {% csrf_token %}
+       
+                <div class="form-field">
+                    <label for="name">Email</label>
+                    <input type="text" id="name" name="email" class="input" required>
+                </div>
+                <div class="form-field">
+                    <label for="password">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="password" name="password" class="password" required>
+                        <i class='bx bx-hide eye-icon' onclick="togglePassword('password', this)"></i>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+         
+        
+            <div class="form-field">
+                    <label for="confirm-password">Confirm Password</label>
+                    <div class="password-container">
+                        <input type="password" id="confirm-password" name="confirm-password" class="password" required>
+                        <i class='bx bx-hide eye-icon' onclick="togglePassword('confirm-password', this)"></i>
+                    </div>
+                    <div class="error-message" id="confirmPasswordError"></div>
+                </div>
+    
+           
+                <div class="form-field">
+                    <label for="email">Github Username</label>
+                    <input type="text" id="username" name="username" class="input" required>
+                </div>
+              
+            
+            <div class="form-group">
+                <div class="form-field">
+                    <button type="submit">Submit</button>
+                </div>
+            </div>
+            <!--If user has already registered to service , login from here-->
+            <div class="form-link">
+                <span>Already have an Account?</span>
+                <a href="/auth/login" class="signup-link">Login</a>
+            </div>
+        </div>
+    </form>
+</section>
+
+<script src="/static/js/sign-up.js"></script>
+
+{% endblock body %}
