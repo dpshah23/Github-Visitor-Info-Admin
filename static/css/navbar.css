@@ -1,0 +1,55 @@
+/* Default styles for navbar */
+.navbar {
+    background-color: #ffffff;
+    color: #000000;
+    /* Add other styles as needed */
+}
+
+/* Media query for small screens */
+@media (max-width: 768px) {
+    .navbar {
+        /* Adjust styles for small screens */
+    }
+}
+
+/* Media query for medium screens */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .navbar {
+        /* Adjust styles for medium screens */
+    }
+}
+
+/* Media query for large screens */
+@media (min-width: 1025px) {
+    .navbar {
+        /* Adjust styles for large screens */
+    }
+}
+
+/* Dark theme styles */
+.navbar.dark {
+    background-color: #000000;
+    color: #ffffff;
+    /* Add other styles for dark theme */
+}
+
+/* Media query for dark theme on small screens */
+@media (max-width: 768px) {
+    .navbar.dark {
+        /* Adjust styles for dark theme on small screens */
+    }
+}
+
+/* Media query for dark theme on medium screens */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .navbar.dark {
+        /* Adjust styles for dark theme on medium screens */
+    }
+}
+
+/* Media query for dark theme on large screens */
+@media (min-width: 1025px) {
+    .navbar.dark {
+        /* Adjust styles for dark theme on large screens */
+    }
+}

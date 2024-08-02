@@ -1,0 +1,16 @@
+
+ .footer-links,
+ .social-links {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ /* Media queries for responsiveness */
+ @media (max-width: 768px) {
+     .footer-links,
+     .social-links {
+         flex-direction: column;
+         text-align: center;
+     }
+ }
