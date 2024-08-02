@@ -36,5 +36,7 @@ class Visits(models.Model):
         db_table = 'Visits'
     
     def __str__(self):
-        return self.unique_link
-    
+        # return f"{self.getusername()} visited from {self.city}, {self.state}, {self.country} at {self.timestamp}"
+        return f"{self.city} from {self.country} at {self.timestamp} for {self.getusername()}"
+    def getusername(self):
+        return Users_main.objects.get(unique_link=self.unique_link).github_username
