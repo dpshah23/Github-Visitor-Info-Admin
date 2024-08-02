@@ -24,3 +24,13 @@
     font-size: 30px;
     font-weight: 600;
 }
+
+.visit-per-hour-chart{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* min-width: 310px; */
+    max-width: 800px;
+    max-height: 250px;
+    height: 250px;
+
+}

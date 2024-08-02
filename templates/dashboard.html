@@ -3,11 +3,72 @@
 {% block body %}
 <link rel="stylesheet" href="/static/css/dashboard.css">
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <span class="welcome-msg">Welcome Back , <strong class="strong">{{request.session.github_username}}</strong></span>
 <br><br><br>
 
 <label for="total-visit" class="total-visit-label">Total Visits  :  </label>
 <span class="total-visit">{{total_visits}}</span>
+
+<br><br><br>
+
+<label for="total-visit" class="total-visit-label">Today's Visits  :  </label>
+<span class="total-visit">{{total_visits_day}}</span>
+<canvas id="myChart" class="visit-per-hour-chart"></canvas>
+    <script>
+        // Extract data from Django context
+        var visits_per_hour = {{ visits_per_hour|safe }};
+        
+        // Labels for each hour of the day
+        var labels = [
+            '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00',
+            '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
+        ];
+
+        // Data for the chart
+        var data = {
+            labels: labels,
+            datasets: [{
+                label: 'Visits per Hour',
+                data: visits_per_hour,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: false,
+                tension: 0.1
+            }]
+        };
+
+        // Chart configuration
+        var config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Hours (24-hour format)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Visits'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // Initialize the chart
+        var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+
 
 {% endblock body %}
