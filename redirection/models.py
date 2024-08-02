@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.hashers import make_password, check_password
 
 class Users_main(models.Model):
     user_id = models.AutoField(primary_key=True)
@@ -11,6 +12,13 @@ class Users_main(models.Model):
 
     class Meta:
         db_table = 'Users_main'
+
+    def set_password(self, raw_password):
+        self.password = make_password(raw_password)
+
+
+    def check_password(self, raw_password):
+        return check_password(raw_password, self.password)
 
     def __str__(self):
         return self.email
