@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Login {% endblock title %}
+{% block body %}
+<link rel="stylesheet" href="/static/css/login.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+<section class="container forms">
+    <div class="form login">
+        <div class="form-content">
+            <header>Login</header>
+            <form action="/auth/login/" method="post">
+                {% csrf_token %}
+                <div class="field input-field">
+                    <input type="email" placeholder="Email" class="input" name="email" required>
+                </div>
+
+                <div class="field input-field">
+                    <input type="password" placeholder="Password" name="password" class="password" id="passwordField" required>
+                    <i class='bx bx-hide eye-icon' id="togglePassword"></i>
+                </div>
+                <div class="form-link">
+                    <a href="/auth/reset" class="forgot-pass">Forgot Password?</a>
+                </div>
+
+                <div class="field button-field">
+                   
+                    <button>Login</button>
+                </div>
+            </form>
+            <div class="form-link">
+                <!--Use this to Register New account-->
+                <span>Don't have an Account ?</span> <a href="/auth/signup" class="signup-link">Signup</a>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock body %}
