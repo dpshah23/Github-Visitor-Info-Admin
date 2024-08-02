@@ -14,6 +14,66 @@ from datetime import timedelta
 
 # Create your views here.
 
+def validate(request):
+    if request.method=="POST":
+        otp1=request.POST.get('o1')
+        otp2=request.POST.get('o2')
+        otp3=request.POST.get('o3')
+        otp4=request.POST.get('o4')
+        otp5=request.POST.get('o5')
+        otp6=request.POST.get('o6')
+
+        fianlotp=otp1+otp2+otp3+otp4+otp5+otp6
+        email=request.session.get('email12')
+        if not request.session.get('email12'):
+            messages.error(request,'Session Expired')
+            return redirect('/auth/login/')
+        try:
+            user=otps.objects.get(email=email,expires_at__gt=timezone.now())
+            # print(user.otp)
+            # print(otp)
+            # print(email)
+            if user.otp==int(fianlotp) and not user.is_expired():
+
+                if Users_main.objects.get(email=email).is_active== True:
+                    context={
+
+                    }
+
+                    response=redirect('/',context) 
+                    response.set_cookie('time', 'true', max_age=15*24*60*60)
+                    response.set_cookie('email', email, max_age=15*24*60*60)
+                    response.set_cookie('Logged_in', 'true', max_age=15*24*60*60)
+
+                    # print("cookie set")
+                    try:
+                        users12=Users_main.objects.get(email=email)
+                    except Users_main.DoesNotExist:
+                        messages.error(request,'User not found')
+                        return redirect('/auth/login/')
+                    request.session['email']=users12.email
+                    request.session['unique_link']=users12.unique_link
+                    request.session['github_username']=users12.github_username
+               
+                    
+                    user.delete()
+                    return response
+                
+                else:
+                    user.delete()
+                    return response
+            else:
+                messages.error(request, 'Invalid OTP')
+                return render(request, 'OTP.html')
+            
+        except otps.DoesNotExist:
+            messages.error(request,"OTP Expired")
+            return redirect('/auth/login')
+        
+
+    return render(request, 'OTP.html')
+
+
 def login(request):
     if request.method=="POST":
         email=request.POST.get('email')
@@ -50,6 +110,7 @@ def login(request):
             from_email=os.getenv('EMAIL12')
             password=os.getenv('PASSWORD12')
 
+            request.session['email12']=email
             subject="One Time Password For Login "
             length=8
             otp=random.randint(111111,999999)
