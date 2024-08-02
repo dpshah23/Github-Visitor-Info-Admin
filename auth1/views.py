@@ -184,3 +184,12 @@ def login(request):
         
         
     return render(request,'login.html')
+
+def logout(request):
+    response=redirect('/')
+    response.delete_cookie('Logged_in')
+    request.session.pop('email')
+    request.session.pop('unique_link')
+    request.session.pop('github_username')
+    request.session.flush()
+    return response
