@@ -1,10 +1,41 @@
 
  .footer-links,
  .social-links {
-     display: flex;
-     justify-content: center;
-     align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    padding: 0;
+    list-style: none;
+    gap: 20px;
+    color: white;
+    color: white;
+    text-decoration: none;
+
  }
+.footer{
+    background-color: #333;
+    padding: 10px;
+    max-width: 100%;
+}
+.footer-links a{
+    color: white;
+    text-decoration: none;
+}
+
+ .footer-links a:hover{
+        color: black;
+ }
+
+ .social-links a{
+    color: white;
+    text-decoration: none;
+ }
+
+ .social-links a:hover{
+        color: black;
+}
+
 
  /* Media queries for responsiveness */
  @media (max-width: 768px) {
