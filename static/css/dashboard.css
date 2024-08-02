@@ -1,0 +1,26 @@
+.welcome-msg{
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 80px;
+    margin-bottom: 20px;
+}
+.strong{
+    font-size: 35px;
+}
+
+::selection{
+    background-color: #333;
+    color: #fff;
+}
+
+.total-visit-label{
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.total-visit{
+    font-size: 30px;
+    font-weight: 600;
+}

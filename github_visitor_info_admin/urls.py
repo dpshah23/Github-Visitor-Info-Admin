@@ -21,4 +21,5 @@ urlpatterns = [
     path('dj-admin/', admin.site.urls),
     path('', include('redirection.urls')),
     path('auth/', include('auth1.urls')),
+    path('home/',include('adminpanel_app.urls'))
 ]
