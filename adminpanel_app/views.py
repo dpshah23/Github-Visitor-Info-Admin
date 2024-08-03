@@ -77,3 +77,15 @@ def get_week_data(request):
     print(result)
     return JsonResponse(result)
         
+
+def get_link(request):
+    if 'email' not in request.session:
+        messages.error(request, 'Login Required')
+        return redirect('/auth/login/')
+    
+    unique_link=request.session['unique_link']
+
+    context={
+        'unique_link': unique_link
+    }
+    return render(request,'get_link.html',{'context':context})
