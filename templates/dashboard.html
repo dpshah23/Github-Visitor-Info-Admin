@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="/static/css/dashboard.css">
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 <span class="welcome-msg">Welcome Back , <strong class="strong">{{request.session.github_username}}</strong></span>
 <br><br><br>
@@ -16,59 +18,132 @@
 <label for="total-visit" class="total-visit-label">Today's Visits  :  </label>
 <span class="total-visit">{{total_visits_day}}</span>
 <canvas id="myChart" class="visit-per-hour-chart"></canvas>
-    <script>
-        // Extract data from Django context
-        var visits_per_hour = {{ visits_per_hour|safe }};
-        
-        // Labels for each hour of the day
-        var labels = [
-            '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00',
-            '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
-        ];
 
-        // Data for the chart
-        var data = {
-            labels: labels,
-            datasets: [{
-                label: 'Visits per Hour',
-                data: visits_per_hour,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                fill: false,
-                tension: 0.1
-            }]
-        };
+<div class="container mt-4">
+    <h1>Weekly Data Chart</h1>
+    <form id="weekForm">
+        <div class="form-group">
+            <label for="weekStart">Select Week:</label>
+            <input type="date" id="weekStart" class="form-control" name="week_start">
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
 
-        // Chart configuration
-        var config = {
-            type: 'line',
-            data: data,
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Hours (24-hour format)'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Visits'
-                        },
-                        beginAtZero: true
-                    }
-                }
+    <canvas id="weeklyChart" class="weekly-chart" width="400" height="200"></canvas>
+</div>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const ctx = document.getElementById('weeklyChart').getContext('2d');
+        let chart;
+    
+        const fetchData = (weekStart = null) => {
+            let url = `/home/get_week_data/`;
+            if (weekStart) {
+                url += `?week_start=${weekStart}`;
             }
+    
+            fetch(url)
+                .then(response => response.json())
+                
+                .then(data => {
+                    if (chart) {
+                        chart.destroy();
+                    }
+    
+                    // Combine date and total_visits for each label
+                    const labels = data.labels.map((date, index) => `${date}`);
+    
+                    chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Visits',
+                                data: data.data.map(value => parseFloat(value.toFixed(2))),
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
         };
+    
+        // Fetch default data
+        fetchData();
+    
+ 
+        document.getElementById('weekForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const weekStart = document.getElementById('weekStart').value;
+            fetchData(weekStart);
+        });
+    });
 
-        // Initialize the chart
-        var myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-        );
-    </script>
+    
+    
+     var visits_per_hour = {{ visits_per_hour|safe }};
+            
+     // Labels for each hour of the day
+     var labels = [
+         '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00',
+         '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
+     ];
+    
+     // Data for the chart
+     var data = {
+         labels: labels,
+         datasets: [{
+             label: 'Visits per Hour',
+             data: visits_per_hour,
+             borderColor: 'rgba(75, 192, 192, 1)',
+             backgroundColor: 'rgba(75, 192, 192, 0.2)',
+             fill: false,
+             tension: 0.1
+         }]
+     };
+    
+     // Chart configuration
+     var config = {
+         type: 'line',
+         data: data,
+         options: {
+             responsive: true,
+             scales: {
+                 x: {
+                     title: {
+                         display: true,
+                         text: 'Hours (24-hour format)'
+                     }
+                 },
+                 y: {
+                     title: {
+                         display: true,
+                         text: 'Visits'
+                     },
+                     beginAtZero: true
+                 }
+             }
+         }
+     };
+    
+     // Initialize the chart
+     var myChart = new Chart(
+         document.getElementById('myChart'),
+         config
+     );
+</script>
 
 
 {% endblock body %}
