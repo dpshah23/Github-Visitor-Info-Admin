@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password, check_password
+from django.utils import timezone
 
 class Users_main(models.Model):
     user_id = models.AutoField(primary_key=True)
@@ -40,3 +41,12 @@ class Visits(models.Model):
         return f"{self.city} from {self.country} at {self.timestamp} for {self.getusername()}"
     def getusername(self):
         return Users_main.objects.get(unique_link=self.unique_link).github_username
+    
+class contactus(models.Model):
+    name=models.CharField(max_length=100)
+    email=models.EmailField(max_length=100)
+    message=models.TextField()
+    timestamp=models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.name
