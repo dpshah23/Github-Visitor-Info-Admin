@@ -19,13 +19,7 @@ def index(request):
     
     today=timezone.now().date()
     total=Visits.objects.filter(unique_link=request.session['unique_link']).count()
-    visits_today = Visits.objects.filter(timestamp__date=today).annotate(hour=TruncHour('timestamp')).values('hour').annotate(count=Count('id')).order_by('hour')
 
-    hours = [f"{hour:02}:00" for hour in range(24)]
-    counts = [0] * 24
-    for visit in visits_today:
-        hour = visit['hour'].hour
-        counts[hour] = visit['count']
 
     top_cities=Visits.objects.filter(unique_link=request.session['unique_link']).values('city').annotate(count=Count('id')).order_by('-count')[:5]
     top_countries=Visits.objects.filter(unique_link=request.session['unique_link']).values('country').annotate(count=Count('id')).order_by('-count')[:5]
@@ -33,35 +27,10 @@ def index(request):
     print(top_cities)
     print(top_countries)
 
-    if request.method=='POST':
-        date=request.POST.get('date_start')
-
-        print(date)
-
-        visits_today = Visits.objects.filter(timestamp__date=date).annotate(hour=TruncHour('timestamp')).values('hour').annotate(count=Count('id')).order_by('hour')
-
-        hours = [f"{hour:02}:00" for hour in range(24)]
-        counts = [0] * 24
-    
-        for visit in visits_today:
-            hour = visit['hour'].hour
-            counts[hour] = visit['count']
-
-        context={
-        'top_cities': top_cities,
-        'top_countries': top_countries,
-        'total_visits_day': sum(counts),
-        'visits_per_hour': counts,
-        'total_visits': total
-        }
-        return render(request,'dashboard.html',context)
-
 
     context={
         'top_cities': top_cities,
         'top_countries': top_countries,
-        'total_visits_day': sum(counts),
-        'visits_per_hour': counts,
         'total_visits': total
     }
     return render(request,'dashboard.html',context)
@@ -120,15 +89,27 @@ def get_specific_day(request):
         messages.error(request, 'Login Required')
         return redirect('/auth/login/')
     
-    date=request.GET.get('date')
-    
-    visits_today = Visits.objects.filter(timestamp__date=date).annotate(hour=TruncHour('timestamp')).values('hour').annotate(count=Count('id')).order_by('hour')
+    date_start = request.GET.get('date_start', None)
+    if date_start:
+        date_start = datetime.strptime(date_start, '%Y-%m-%d')
+    else:
+        date_start = timezone.now().date()
+
+    visits_today = Visits.objects.filter(timestamp__date=date_start).annotate(hour=TruncHour('timestamp')).values('hour').annotate(count=Count('id')).order_by('hour')
 
     hours = [f"{hour:02}:00" for hour in range(24)]
     counts = [0] * 24
-    
-    for visit in visits_today:
-        hour = visit['hour'].hour
-        counts[hour] = visit['count']
 
-    return JsonResponse({'hours': hours, 'counts': counts})
+    for visit in visits_today:
+            hour = visit['hour'].hour
+            counts[hour] = visit['count']
+
+    context={
+        'total_visits_day': sum(counts),
+        'visits_per_hour': counts,
+    }
+
+    print(context)
+
+    return JsonResponse(context)
+

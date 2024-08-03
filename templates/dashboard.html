@@ -21,11 +21,13 @@
 <br><br>
 
 <label for="total-visit" class="total-visit-label">Today's Visits  :  </label>
-<span class="total-visit">{{total_visits_day}}</span>
+<span id="totalVisitsDay" class="total-visit">{{ total_visits_day }}</span>
+
+
 
 <br><br>
 <div class="container mt-4">
-<form id="dateform" action="" method="POST">
+<form id="dateform">
     {% csrf_token %}
     <div class="form-group">
         <label for="date">Select Date:</label>
@@ -89,35 +91,36 @@
 </table>
 
 <script>
-
     document.addEventListener('DOMContentLoaded', () => {
-        const ctx = document.getElementById('weeklyChart').getContext('2d');
-        let chart;
-    
-        const fetchData = (weekStart = null) => {
+        const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+        const dailyCtx = document.getElementById('myChart').getContext('2d');
+        const totalVisitsDayElement = document.getElementById('totalVisitsDay');
+        let weeklyChart, dailyChart;
+
+        // Fetch and render weekly data
+        const fetchWeeklyData = (weekStart = null) => {
             let url = `/home/get_week_data/`;
             if (weekStart) {
                 url += `?week_start=${weekStart}`;
             }
-    
+
             fetch(url)
                 .then(response => response.json())
-                
                 .then(data => {
-                    if (chart) {
-                        chart.destroy();
+                    if (weeklyChart) {
+                        weeklyChart.destroy();
                     }
-    
-                    // Combine date and total_visits for each label
-                    const labels = data.labels.map((date, index) => `${date}`);
-    
-                    chart = new Chart(ctx, {
+
+                    const labels = data.labels;
+                    const visits = data.data.map(value => parseFloat(value.toFixed(2)));
+
+                    weeklyChart = new Chart(weeklyCtx, {
                         type: 'bar',
                         data: {
                             labels: labels,
                             datasets: [{
                                 label: 'Visits',
-                                data: data.data.map(value => parseFloat(value.toFixed(2))),
+                                data: visits,
                                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                                 borderColor: 'rgba(75, 192, 192, 1)',
                                 borderWidth: 1
@@ -126,79 +129,84 @@
                         options: {
                             scales: {
                                 y: {
-                                    beginAtZero: true,
-                                    
+                                    beginAtZero: true
                                 }
                             }
                         }
                     });
                 })
-                .catch(error => console.error('Error fetching data:', error));
+                .catch(error => console.error('Error fetching weekly data:', error));
         };
-    
-        // Fetch default data
-        fetchData();
-    
- 
+
+        // Fetch and render daily data
+        const fetchDailyData = (dateStart = new Date().toISOString().split('T')[0]) => {
+            let url = `/home/get_specific_day/?date_start=${dateStart}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (dailyChart) {
+                        dailyChart.destroy();
+                    }
+
+                    const labels = Array.from({ length: 24 }, (_, i) => `${i < 10 ? '0' : ''}${i}:00`);
+                    const counts = data.visits_per_hour;
+
+                    dailyChart = new Chart(dailyCtx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Visits per Hour',
+                                data: counts,
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                fill: false,
+                                tension: 0.1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Hours (24-hour format)'
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: 'Visits'
+                                    },
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                    totalVisitsDayElement.textContent = data.total_visits_day;
+                })
+                .catch(error => console.error('Error fetching daily data:', error));
+        };
+
+        // Fetch initial data
+        fetchWeeklyData();
+        fetchDailyData();
+
+        // Handle weekly form submission
         document.getElementById('weekForm').addEventListener('submit', (event) => {
             event.preventDefault();
             const weekStart = document.getElementById('weekStart').value;
-            fetchData(weekStart);
+            fetchWeeklyData(weekStart);
+        });
+
+        // Handle daily form submission
+        document.getElementById('dateform').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const dateStart = document.getElementById('datestart').value;
+            fetchDailyData(dateStart);
         });
     });
-
-    
-    
-     var visits_per_hour = {{ visits_per_hour|safe }};
-            
-     // Labels for each hour of the day
-     var labels = [
-         '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00',
-         '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
-     ];
-    
-     // Data for the chart
-     var data = {
-         labels: labels,
-         datasets: [{
-             label: 'Visits per Hour',
-             data: visits_per_hour,
-             borderColor: 'rgba(75, 192, 192, 1)',
-             backgroundColor: 'rgba(75, 192, 192, 0.2)',
-             fill: false,
-             tension: 0.1
-         }]
-     };
-    
-     // Chart configuration
-     var config = {
-         type: 'line',
-         data: data,
-         options: {
-             responsive: true,
-             scales: {
-                 x: {
-                     title: {
-                         display: true,
-                         text: 'Hours (24-hour format)'
-                     }
-                 },
-                 y: {
-                     title: {
-                         display: true,
-                         text: 'Visits'
-                     },
-                     beginAtZero: true
-                 }
-             }
-         }
-     };
-    
-     // Initialize the chart
-     var myChart = new Chart(
-         document.getElementById('myChart'),
-         config
-     );
 </script>
 
 
