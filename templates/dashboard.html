@@ -36,7 +36,9 @@
     <button type="submit" class="btn btn-primary mt-3">Submit</button>
 </form>
 </div>
+<div class="container mt-4">
 <canvas id="myChart" class="visit-per-hour-chart"></canvas>
+</div>
 
 <div class="container mt-4">
     <h1>Weekly Data Chart</h1>
@@ -89,7 +91,9 @@
             {% endfor %}
         </tbody>
 </table>
+</div>
 
+<br><br><br>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');

@@ -18,7 +18,7 @@ body{
 }
 
 .navbar a:hover{
-    color: black;
+    color: rgb(100, 159, 199);
 }
 
 .navbar a.active{
