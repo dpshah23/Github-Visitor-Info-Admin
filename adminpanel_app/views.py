@@ -25,7 +25,16 @@ def index(request):
     for visit in visits_today:
         hour = visit['hour'].hour
         counts[hour] = visit['count']
+
+    top_cities=Visits.objects.filter(unique_link=request.session['unique_link']).values('city').annotate(count=Count('id')).order_by('-count')[:5]
+    top_countries=Visits.objects.filter(unique_link=request.session['unique_link']).values('country').annotate(count=Count('id')).order_by('-count')[:5]
+
+    print(top_cities)
+    print(top_countries)
+
     context={
+        'top_cities': top_cities,
+        'top_countries': top_countries,
         'total_visits_day': sum(counts),
         'visits_per_hour': counts,
         'total_visits': total
