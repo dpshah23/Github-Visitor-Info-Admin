@@ -9,3 +9,6 @@ def about(request):
 
 def termsandconditions(request):
     return render(request,"termsandconditions.html")
+
+def privacy(request):
+    return render(request,"privacy.html")
