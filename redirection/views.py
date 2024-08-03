@@ -6,3 +6,6 @@ def index(request):
 
 def about(request):
     return render(request,'about-us.html')
+
+def termsandconditions(request):
+    return render(request,"termsandconditions.html")
