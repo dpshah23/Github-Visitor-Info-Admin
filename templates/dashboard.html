@@ -22,6 +22,18 @@
 
 <label for="total-visit" class="total-visit-label">Today's Visits  :  </label>
 <span class="total-visit">{{total_visits_day}}</span>
+
+<br><br>
+<div class="container mt-4">
+<form id="dateform" action="" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="date">Select Date:</label>
+        <input type="date" id="datestart" class="form-control" name="date_start">
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
+</div>
 <canvas id="myChart" class="visit-per-hour-chart"></canvas>
 
 <div class="container mt-4">

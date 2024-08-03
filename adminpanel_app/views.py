@@ -16,6 +16,7 @@ def index(request):
         messages.error(request, 'Login Required')
         return redirect('/auth/login/')
     
+    
     today=timezone.now().date()
     total=Visits.objects.filter(unique_link=request.session['unique_link']).count()
     visits_today = Visits.objects.filter(timestamp__date=today).annotate(hour=TruncHour('timestamp')).values('hour').annotate(count=Count('id')).order_by('hour')
@@ -31,6 +32,30 @@ def index(request):
 
     print(top_cities)
     print(top_countries)
+
+    if request.method=='POST':
+        date=request.POST.get('date_start')
+
+        print(date)
+
+        visits_today = Visits.objects.filter(timestamp__date=date).annotate(hour=TruncHour('timestamp')).values('hour').annotate(count=Count('id')).order_by('hour')
+
+        hours = [f"{hour:02}:00" for hour in range(24)]
+        counts = [0] * 24
+    
+        for visit in visits_today:
+            hour = visit['hour'].hour
+            counts[hour] = visit['count']
+
+        context={
+        'top_cities': top_cities,
+        'top_countries': top_countries,
+        'total_visits_day': sum(counts),
+        'visits_per_hour': counts,
+        'total_visits': total
+        }
+        return render(request,'dashboard.html',context)
+
 
     context={
         'top_cities': top_cities,
@@ -89,3 +114,21 @@ def get_link(request):
         'unique_link': unique_link
     }
     return render(request,'get_link.html',{'context':context})
+
+def get_specific_day(request):
+    if 'email' not in request.session:
+        messages.error(request, 'Login Required')
+        return redirect('/auth/login/')
+    
+    date=request.GET.get('date')
+    
+    visits_today = Visits.objects.filter(timestamp__date=date).annotate(hour=TruncHour('timestamp')).values('hour').annotate(count=Count('id')).order_by('hour')
+
+    hours = [f"{hour:02}:00" for hour in range(24)]
+    counts = [0] * 24
+    
+    for visit in visits_today:
+        hour = visit['hour'].hour
+        counts[hour] = visit['count']
+
+    return JsonResponse({'hours': hours, 'counts': counts})
