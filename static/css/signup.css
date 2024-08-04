@@ -8,8 +8,8 @@
 }
 
 ::selection {
-  background-color: #006989;
-  color: #fff;
+  background-color: var(--selection-bg-color);
+  color: var(--selection-text-color);
 }
 
 .container {
@@ -18,7 +18,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0ece2;
+  background-color: var(--common-bg-color);
   padding: 20px;
   overflow: hidden;
 }
@@ -29,20 +29,26 @@
   padding: 20px;
 }
 
+a{
+    color: #007BFF;
+    text-decoration: none;
+}
+
+
 form {
   width: 90%;
   max-width: 900px;
   padding: 30px;
   border-radius: 10px;
-  background-color: #ffffff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--common-bg-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 5);
   margin-top: 6.3rem;
 }
 
 header {
   font-size: 30px;
   font-weight: 600;
-  color: #006989;
+  color: var(--text-color);
   text-align: center;
   margin-bottom: 20px;
 }
@@ -68,6 +74,7 @@ header {
 .form-field label {
   font-size: 16px;
   margin-bottom: 5px;
+  color: var(--text-color);
 }
 
 .password-container {
@@ -100,20 +107,21 @@ header {
 .form-field input:focus,
 .form-field select:focus,
 .form-field button:focus {
-  border: 1px solid #006989;
+  border: 1px solid var(--common-bg-color);
 }
 
 .form-field button {
-  background-color: #006989;
+  background-color: var(--common-bg-color);
   color: #ffffff;
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-size: 16px;
   margin-top: 20px;
+  box-shadow: rgba(0, 0, 0, 4);
 }
 
 .form-field button:hover {
-  background-color: #037fa4;
+  background-color: #333;
 }
 
 .error-message {
@@ -127,13 +135,19 @@ header {
   margin-top: 10px;
 }
 
-.form-link span,
+.form-link span{
+  font-size:16px;
+  color: var(--text-color);
+}
+
 .form-link a {
   font-size: 16px;
+  color: #007BFF;;
 }
 
 .form-link a:hover {
-  text-decoration: underline;
+    color: #007BFF;
+    text-decoration: underline;
 }
 
 @media only screen and (max-width: 768px) {
