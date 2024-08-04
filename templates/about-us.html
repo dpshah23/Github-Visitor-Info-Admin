@@ -7,15 +7,30 @@
 
 
 <style>
-    body {
-        padding-top: 20px;
+    @import url('../static/css/common.css');
+    .container-full {
+        background-color: var(--common-bg-color);
+        /* color: var(--common-text-color); */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
+    
+    header{
+        color:var(--text-color)
+    }
+
+    ::selection {
+    background-color: var(--selection-bg-color);
+    color: var(--selection-text-color);
+}
     .container {
         max-width: 900px;
     }
     .section-heading {
-        margin-top: 20px;
+       
         margin-bottom: 20px;
+        color: var(--text-color);
     }
     .section-heading h2 {
         border-bottom: 2px solid #007bff;
@@ -23,71 +38,83 @@
     }
     .about-content p {
         text-align: justify;
+        color: var(--text-color);
+    }
+    li{
+        color: var(--text-color);
+    }
+    a{
+        color:var(--text-color);
+        /* text-decoration: none; */
+        text-underline-position: below;
+      
+        
     }
 </style>
 
-
-<div class="container mt-3">
-    <header class="mb-4">
-        <h1 class="text-center">GitHub Profile Insights</h1>
-        <p class="text-center">An open-source project dedicated to providing detailed analytics for GitHub profiles.</p>
-    </header>
-
-    <div class="about-content">
-        <div class="section-heading">
-            <h2>Motivation</h2>
-        </div>
-        <p>In the world of open-source and developer portfolios, understanding who visits your GitHub profile can offer valuable insights. This project was created to bridge that gap by providing an easy-to-use tool for tracking profile engagement. By visualizing visitor data, developers and professionals can better understand their audience and tailor their profiles to better meet their needs.</p>
-
-        <div class="section-heading">
-            <h2>What We Do</h2>
-        </div>
-        <p>Our platform provides a range of analytics to enhance your GitHub profile experience:</p>
-        <ul>
-            <li><strong>Visitor Information:</strong> Track the number of visits to your GitHub profile and analyze the geographical distribution of your visitors by country and city.</li>
-            <li><strong>Daily and Weekly Trends:</strong> Monitor engagement patterns through daily and weekly visit data.</li>
-            <li><strong>Top Cities and Countries:</strong> Discover which locations frequently visit your profile.</li>
-        </ul>
-
-        <div class="section-heading">
-            <h2>Key Features</h2>
-        </div>
-        <ul>
-            <li><strong>Comprehensive Analytics:</strong> Detailed reports on visit numbers and their distribution across different hours of the day.</li>
-            <li><strong>Geographical Insights:</strong> Understand the locations of your profile visitors without storing personal IP addresses.</li>
-            <li><strong>User-Friendly Interface:</strong> Access your data through an intuitive and easy-to-navigate dashboard.</li>
-        </ul>
-
-        <div class="section-heading">
-            <h2>Technology Stack</h2>
-        </div>
-        <p>The platform leverages a modern tech stack to deliver seamless performance and insights:</p>
-        <ul>
-            <li><strong>Backend:</strong> Django with MySQL for robust and scalable data handling.</li>
-            <li><strong>Frontend:</strong> HTML, CSS, and JavaScript with Chart.js for interactive data visualization.</li>
-            <li><strong>API Integration:</strong> Custom APIs for fetching and processing data.</li>
-        </ul>
-
-
-        <div class="section-heading">
-            <h2>Contribute</h2>
-        </div>
-        <p>We welcome contributions from the community to help improve the project.</p>
+<div class="container-full">
+    <div class="container mt-3">
+        <header class="mb-4">
+            <h1 class="text-center">GitHub Profile Insights</h1>
+            <p class="text-center">An open-source project dedicated to providing detailed analytics for GitHub profiles.</p>
+        </header>
         
-
-        <div class="section-heading">
-            <h2>Privacy and Data Handling</h2>
+        <div class="about-content">
+            <div class="section-heading">
+                <h2>Motivation</h2>
+            </div>
+            <p>In the world of open-source and developer portfolios, understanding who visits your GitHub profile can offer valuable insights. This project was created to bridge that gap by providing an easy-to-use tool for tracking profile engagement. By visualizing visitor data, developers and professionals can better understand their audience and tailor their profiles to better meet their needs.</p>
+            
+            <div class="section-heading">
+                <h2>What We Do</h2>
+            </div>
+            <p>Our platform provides a range of analytics to enhance your GitHub profile experience:</p>
+            <ul>
+                <li><strong>Visitor Information:</strong> Track the number of visits to your GitHub profile and analyze the geographical distribution of your visitors by country and city.</li>
+                <li><strong>Daily and Weekly Trends:</strong> Monitor engagement patterns through daily and weekly visit data.</li>
+                <li><strong>Top Cities and Countries:</strong> Discover which locations frequently visit your profile.</li>
+            </ul>
+            
+            <div class="section-heading">
+                <h2>Key Features</h2>
+            </div>
+            <ul>
+                <li><strong>Comprehensive Analytics:</strong> Detailed reports on visit numbers and their distribution across different hours of the day.</li>
+                <li><strong>Geographical Insights:</strong> Understand the locations of your profile visitors without storing personal IP addresses.</li>
+                <li><strong>User-Friendly Interface:</strong> Access your data through an intuitive and easy-to-navigate dashboard.</li>
+            </ul>
+            
+            <div class="section-heading">
+                <h2>Technology Stack</h2>
+            </div>
+            <p>The platform leverages a modern tech stack to deliver seamless performance and insights:</p>
+            <ul>
+                <li><strong>Backend:</strong> Django with MySQL for robust and scalable data handling.</li>
+                <li><strong>Frontend:</strong> HTML, CSS, and JavaScript with Chart.js for interactive data visualization.</li>
+                <li><strong>API Integration:</strong> Custom APIs for fetching and processing data.</li>
+            </ul>
+            
+            
+            <div class="section-heading">
+                <h2>Contribute</h2>
+            </div>
+            <p>We welcome contributions from the community to help improve the project.</p>
+            
+            
+            <div class="section-heading">
+                <h2>Privacy and Data Handling</h2>
+            </div>
+            <p>We prioritize user privacy and transparency. Our platform does not store personal IP addresses or active hours. We provide aggregated insights to help you understand your profile's reach and engagement without compromising your privacy.</p>
+            
+            <div class="section-heading">
+                <h2>Open Source</h2>
+            </div>
+            <p>This project is an open-source initiative maintained by <a href="https://github.com/dpshah23">Deep Shah</a>. We believe in collaboration and open innovation. Explore our code, contribute, or suggest improvements. Your feedback and contributions are highly valued.</p>
+            <p>For more information or to get started, visit our <a href="https://github.com/dpshah23/Github-Visitor-Info-Admin">Admin Panel Repository</a> and <a href="https://github.com/dpshah23/Github-Visitor-Info">Github Repository</a>.</p>
         </div>
-        <p>We prioritize user privacy and transparency. Our platform does not store personal IP addresses or active hours. We provide aggregated insights to help you understand your profile's reach and engagement without compromising your privacy.</p>
-
-        <div class="section-heading">
-            <h2>Open Source</h2>
-        </div>
-        <p>This project is an open-source initiative maintained by <a href="https://github.com/dpshah23">Deep Shah</a>. We believe in collaboration and open innovation. Explore our code, contribute, or suggest improvements. Your feedback and contributions are highly valued.</p>
-        <p>For more information or to get started, visit our <a href="https://github.com/dpshah23/Github-Visitor-Info-Admin">Admin Panel Repository</a> and <a href="https://github.com/dpshah23/Github-Visitor-Info">Github Repository</a>.</p>
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-{% endblock body %}
+    {% endblock body %}

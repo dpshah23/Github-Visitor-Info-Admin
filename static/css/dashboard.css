@@ -5,7 +5,10 @@ body {
     color: var(--text-color);
     font-family: Arial, sans-serif;
 }
-
+::selection {
+    background-color: var(--selection-bg-color);
+    color: var(--selection-text-color);
+}
 /* Alerts */
 .alert {
     background-color: #2d2d2d;

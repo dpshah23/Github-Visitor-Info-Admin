@@ -88,8 +88,8 @@ body {
 }
 
 ::selection {
-    background-color: #c9d1d9;
-    color: #fff;
+    background-color: var(--selection-bg-color);
+    color: var(--selection-text-color);
 }
 
 /* Section Styles */
