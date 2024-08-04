@@ -1,25 +1,18 @@
 {
-    "builds":[
-    {
-        "src":"github_visitor_info_admin/wsgi.py",
-        "use":"@vercel/python"
-    },
-    {
-        "src":"build.sh",
-        "use":"@vercel/static-build",
-        "config":{
-            "distDir":"staticfiles"
+    "builds": [
+        {
+            "src": "github_visitor_info_admin/wsgi.py",
+            "use": "@vercel/python"
         }
-    }
-],
-"routes":[
-    {
-        "src":"/(.*)",
-        "dest":"github_visitor_info_admin/wsgi.py"
-    },
-    {
-        "src":"/static/(.*)",
-        "dest":"/static/$1"
-    }
-]
+    ],
+    "routes": [
+        {
+            "src": "/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "github_visitor_info_admin/wsgi.py"
+        }
+    ]
 }
