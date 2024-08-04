@@ -40,3 +40,15 @@
         text-align: center;
     }
 }
+
+.contact-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.mail-link-footer{
+    text-decoration: none;
+    color: var(--text-color);
+}

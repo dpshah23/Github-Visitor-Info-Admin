@@ -1,3 +1,19 @@
+/* General styles for body and sections */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #c9d1d9;
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero Section */
 .hero {
     font-family: "Poppins", sans-serif;
     color: #c9d1d9;
@@ -16,6 +32,7 @@
     padding: 20px;
 }
 
+
 .hero h1 {
     font-size: 3.5em;
     font-weight: 700;
@@ -26,39 +43,28 @@
     align-items: center;
 }
 
-
 @media (max-width: 1105px) {
-
     .hero h1 {
         font-size: 3.8em;
     }
-
-}
-::selection {
-    background-color: black;
-    color: #fff;
 }
 
 @media (max-width: 992px) {
     .hero {
         height: 40vh;
     }
-
     .hero h1 {
         font-size: 3.8em;
     }
-
 }
 
 @media (max-width: 768px) {
     .hero {
         height: 35vh;
     }
-
     .hero h1 {
         font-size: 2.7em;
     }
-
 }
 
 @media (max-width: 576px) {
@@ -66,21 +72,72 @@
         height: 30vh;
         padding: 10px;
     }
-
     .hero h1 {
         font-size: 1.9em;
         margin-top: 3rem;
     }
-
 }
 
 @media (max-width: 360px) {
     .hero {
         height: 25vh;
     }
-
     .hero h1 {
         font-size: 1.8em;
     }
+}
 
+::selection {
+    background-color: #c9d1d9;
+    color: #fff;
+}
+
+/* Section Styles */
+section {
+    padding: 40px 20px;
+}
+
+h2 {
+    font-size: 2em;
+    margin-top: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+.steps {
+    display: flex;
+    flex-direction: column;
+}
+
+.step {
+    margin-bottom: 20px;
+}
+
+/* CTA Button Styles */
+.cta-button {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.cta-button:hover {
+    background: #0056b3;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .steps {
+        flex-direction: column;
+    }
 }

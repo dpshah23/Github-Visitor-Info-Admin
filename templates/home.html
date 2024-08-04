@@ -1,12 +1,58 @@
 {% extends "base.html" %}
 {% block title %}Home {% endblock title %}
 {% block body %}
+{% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> {% endcomment %}
+
 <link rel="stylesheet" href="/static/css/home.css">
 <section class="hero" aria-label="home">
     <div class="hero-content">
       <h1 class="h1 hero-title">See where your GitHub profile is accessed, down to the city and state.</h1>
+      <a href="/auth/signup/" class="cta-button">Get Started</a>
+      <a href="/about/" class="cta-button">Learn More</a>
     </div>
   </section>
+<div class="container">
+  <section id="about">
+    <h2>About GitHub Insights</h2>
+    <p>Our platform helps you track visits to your GitHub profile, providing valuable data to improve your presence and engagement.</p>
+</section>
+
+<section id="features">
+  <h2>Our Features</h2>
+  <ul>
+      <li>Visitor Tracking</li>
+      <li>Geographical Insights</li>
+      <li>Detailed Analytics</li>
+      <li>Customizable Dashboard</li>
+  </ul>
+</section>
+
+<section id="how-it-works">
+  <h2>How It Works</h2>
+  <div class="steps">
+      <div class="step">
+          <h3>Step 1</h3>
+          <p>Create a unique link for your GitHub profile.</p>
+      </div>
+      <div class="step">
+          <h3>Step 2</h3>
+          <p>Add the link to your GitHub profile README.</p>
+      </div>
+      <div class="step">
+          <h3>Step 3</h3>
+          <p>Track and analyze visits through our platform.</p>
+      </div>
+  </div>
+</section>
+
+<section id="register">
+  <h2>Ready to Track Your GitHub Profile?</h2>
+  <a href="/auth/signup/" class="cta-button">Sign Up Now</a>
+  <a href="/contact-us/" class="cta-button">Contact Us</a>
+</section>
+
+</div>
 
 {% endblock body %}
 
