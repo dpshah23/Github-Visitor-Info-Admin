@@ -111,7 +111,7 @@ header {
 }
 
 .form-field button {
-  background-color: var(--common-bg-color);
+  background-color: var(--hover-color);
   color: #ffffff;
   cursor: pointer;
   transition: background-color 0.3s ease;

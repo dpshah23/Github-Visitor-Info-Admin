@@ -10,8 +10,8 @@
     --even-row-bg-color: #1e1e1e; /* Darker background for even rows */
     --hover-row-bg-color: #2d2d2d; /* Dark gray background for row on hover */
     --border-color: #444444; /* Darker border color */
-    --selection-bg-color:#c9d1d9;
-    --selection-text-color:#fff;
+    --selection-bg-color:#ffffff;
+    --selection-text-color:#1d1d1f;
 }
 
 /* ---------Custom Scroll bar----------- */
