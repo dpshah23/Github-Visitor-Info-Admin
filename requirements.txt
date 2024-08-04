@@ -2,4 +2,4 @@ django
 django-jazzmin
 python-dotenv
 whitenoise
-mysqlclient
+mysql-connector-python
