@@ -5,52 +5,95 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-
 <style>
     @import url('../static/css/common.css');
-    body{
+    body {
         background-color: var(--common-bg-color);
         color: var(--common-text-color);
     }
     .container-full {
         background-color: var(--common-bg-color);
-        /* color: var(--common-text-color); */
         display: flex;
         flex-direction: column;
         justify-content: center;
+        padding: 20px;
     }
     
-    header{
-        color:var(--text-color)
+    header {
+        color: var(--text-color);
     }
 
     ::selection {
-    background-color: var(--selection-bg-color);
-    color: var(--selection-text-color);
-}
+        background-color: var(--selection-bg-color);
+        color: var(--selection-text-color);
+    }
+    
     .container {
         max-width: 900px;
     }
+    
     .section-heading {
-       
         margin-bottom: 20px;
         color: var(--text-color);
     }
+    
     .section-heading h2 {
         border-bottom: 2px solid #007bff;
         padding-bottom: 10px;
     }
+    
     .about-content p {
         text-align: justify;
         color: var(--text-color);
     }
-    li{
+    
+    li {
         color: var(--text-color);
     }
-    a{
+    
+    a {
         color: #007BFF;
         text-decoration: none;
-        
+    }
+    
+    @media (max-width: 1200px) {
+        .container {
+            max-width: 90%;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .container {
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .section-heading h2 {
+            font-size: 1.5rem;
+        }
+
+        .about-content ul {
+            padding-left: 20px;
+        }
+
+        .about-content p, .about-content ul {
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .section-heading h2 {
+            font-size: 1.25rem;
+        }
+
+        .about-content p, .about-content ul {
+            font-size: 0.8rem;
+        }
+
+        .about-content {
+            padding: 10px;
+        }
     }
 </style>
 
@@ -96,12 +139,10 @@
                 <li><strong>API Integration:</strong> Custom APIs for fetching and processing data.</li>
             </ul>
             
-            
             <div class="section-heading">
                 <h2>Contribute</h2>
             </div>
             <p>We welcome contributions from the community to help improve the project.</p>
-            
             
             <div class="section-heading">
                 <h2>Privacy and Data Handling</h2>
@@ -115,8 +156,8 @@
             <p>For more information or to get started, visit our <a href="https://github.com/dpshah23/Github-Visitor-Info-Admin">Admin Panel Repository</a> and <a href="https://github.com/dpshah23/Github-Visitor-Info">Github Repository</a>.</p>
         </div>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
 </div>
-    {% endblock body %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+{% endblock body %}
