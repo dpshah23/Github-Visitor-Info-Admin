@@ -1,10 +1,10 @@
 /* privacy_policy.css */
-
+@import url('./common.css');
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
+    color: var(--text-color);
+    background-color: var(--common-bg-color);
     margin: 0;
     padding: 0;
 }
@@ -13,14 +13,14 @@ main {
     max-width: 900px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: var(--common-bg-color);
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.01);
 }
 
 h2 {
     font-size: 24px;
-    color: #007BFF;
+    color: var(--text-color);
     border-bottom: 2px solid #007BFF;
     padding-bottom: 10px;
     margin-bottom: 20px;
@@ -28,7 +28,7 @@ h2 {
 
 h3 {
     font-size: 20px;
-    color: #007BFF;
+    color: var(--text-color);
     margin-top: 20px;
     margin-bottom: 10px;
 }
