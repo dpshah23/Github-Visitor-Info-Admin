@@ -40,22 +40,22 @@ def get_week_data(request):
     if week_start:
         week_start = timezone.make_aware(datetime.strptime(week_start, '%Y-%m-%d'))
     else:
-        today = timezone.now().date()
+        today=timezone.now().date()
         week_start = today - timedelta(days=today.weekday())
         week_start = timezone.make_aware(datetime.combine(week_start, datetime.min.time()))
 
 
-    week_end = week_start + timedelta(days=6)
+    week_end = week_start + timedelta(days=6, hours=23, minutes=59, seconds=59)
 
     visits = Visits.objects.filter(timestamp__range=[week_start, week_end])
 
-    visit_data = {week_start + timedelta(days=i): 0 for i in range(7)}
+    visit_data = {week_start.date() + timedelta(days=i): 0 for i in range(7)}
+
 
     for visit in visits:
         date = visit.timestamp.date()
-        if date not in visit_data:
-            visit_data[date] = 0  
-        visit_data[date] += 1
+        if date in visit_data:
+            visit_data[date] += 1
 
     result={
         'labels': [date.strftime('%Y-%m-%d') for date in visit_data.keys()],
