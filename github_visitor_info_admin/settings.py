@@ -94,7 +94,7 @@ load_dotenv()
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql.connector.django',
         'NAME': os.getenv('DBNAME'),      # Replace with your database name
         'USER': 'avnadmin',      # Replace with your database user
         'PASSWORD': os.getenv('PASSWORD'),  # Replace with your database password
