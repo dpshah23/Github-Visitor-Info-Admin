@@ -1,12 +1,12 @@
 .hero {
     font-family: "Poppins", sans-serif;
-    color: #333;
+    color: #c9d1d9;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 45vh;
     width: 100%;
-    background: #fff;
+    background: #0d1117;
     text-align: center;
     margin-top: 10px;
 }

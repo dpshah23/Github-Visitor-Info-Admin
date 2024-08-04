@@ -1,6 +1,15 @@
+@import './common.css'; /* Import common styles */
 
- .footer-links,
- .social-links {
+.footer {
+    background-color: var(--common-bg-color); /* Same background as navbar */
+    color: var(--text-color);
+    padding: 20px;
+    max-width: 100%;
+    border-top: 1px solid #0d1117; /* Optional border for separation */
+}
+
+.footer-links,
+.social-links {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,40 +17,26 @@
     padding: 0;
     list-style: none;
     gap: 20px;
-    color: white;
-    color: white;
-    text-decoration: none;
-
- }
-.footer{
-    background-color: #333;
-    padding: 10px;
-    max-width: 100%;
-}
-.footer-links a{
-    color: white;
     text-decoration: none;
 }
 
- .footer-links a:hover{
-    color: rgb(100, 159, 199);
- }
-
- .social-links a{
-    color: white;
+.footer-links a,
+.social-links a {
+    color: var(--text-color);
     text-decoration: none;
- }
-
- .social-links a:hover{
-    color: rgb(100, 159, 199);
 }
 
+.footer-links a:hover,
+.social-links a:hover {
+    color: var(--hover-color);
+}
 
- /* Media queries for responsiveness */
- @media (max-width: 768px) {
-     .footer-links,
-     .social-links {
-         flex-direction: column;
-         text-align: center;
-     }
- }
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .footer-links,
+    .social-links {
+        font-size: 0.8rem;
+        flex-direction: row;
+        text-align: center;
+    }
+}

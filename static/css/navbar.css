@@ -1,31 +1,33 @@
-body{
+@import url("./common.css");
+body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
 }
 
-.navbar{
-    background-color: #333;
-    color: black;
+/* Use the common background and text color */
+.navbar {
+    background-color: var(--common-bg-color);
+    color: var(--text-color);
     padding: 10px;
     margin-bottom: 10px;
 }
 
-.navbar a{
-    color: white;
+.navbar a {
+    color: var(--text-color);
     text-decoration: none;
     margin: 0 10px;
 }
 
-.navbar a:hover{
-    color: rgb(100, 159, 199);
+.navbar a:hover {
+    color: var(--hover-color);
 }
 
-.navbar a.active{
+.navbar a.active {
     color: white;
 }
 
-.navbar-menu{
+.navbar-menu {
     display: flex;
     justify-content: right;
     align-items: center;
