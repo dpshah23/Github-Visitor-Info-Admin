@@ -1,44 +1,126 @@
-.welcome-msg{
-    font-size: 30px;
-    font-weight: 600;
-    margin-top: 80px;
-    margin-bottom: 20px;
-}
-.strong{
-    font-size: 35px;
+@import url('./common.css');
+/* General Body Styling */
+body {
+    background-color: var(--common-bg-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
 }
 
-::selection{
-    background-color: #333;
-    color: #fff;
+/* Alerts */
+.alert {
+    background-color: #2d2d2d;
+    color: var(--text-color);
+    border-color: var(--border-color);
 }
 
-.total-visit-label{
+.alert .alert-link {
+    color: var(--hover-color);
+}
+
+.alert .alert-link:hover {
+    color: #a1c4fd;
+}
+
+/* Table Styling */
+.table.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--table-bg-color);
+    color: var(--text-color);
+}
+
+.table.custom-table th,
+.table.custom-table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid var(--border-color);
+}
+
+.table.custom-table thead th {
+    background-color: var(--thead-bg-color);
+    color: var(--thead-text-color);
+}
+
+.table.custom-table tbody tr:nth-of-type(odd) {
+    background-color: var(--odd-row-bg-color);
+}
+
+.table.custom-table tbody tr:nth-of-type(even) {
+    background-color: var(--even-row-bg-color);
+}
+
+.table.custom-table tbody tr:hover {
+    background-color: var(--hover-row-bg-color);
+}
+
+.total-visit-label {
     font-size: 20px;
     font-weight: 600;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.total-visit{
+.total-visit {
     font-size: 30px;
     font-weight: 600;
 }
 
-.visit-per-hour-chart{
+/* Form Elements */
+.form-group label {
+    color: var(--text-color);
+}
+
+.form-control {
+    background-color: #2d2d2d;
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.form-control:focus {
+    background-color: #2d2d2d;
+    color: var(--text-color);
+    border-color: var(--hover-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+/* Charts */
+.visit-per-hour-chart,
+.weekly-chart {
+    background-color: var(--common-bg-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
     margin-top: 20px;
     margin-bottom: 20px;
-    /* min-width: 310px; */
     max-width: 800px;
     max-height: 250px;
     height: 250px;
-
 }
-.weekly-chart{
-    margin-top: 20px;
-    margin-bottom: 25px;
-   
-    max-width: 800px;
-    max-height: 250px;
-    height: 250px;
+
+/* Navbar and Footer */
+.navbar, .footer {
+    background-color: var(--common-bg-color);
+    color: var(--text-color);
+}
+
+/* Miscellaneous */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+}
+
+a {
+    color: var(--text-color);
+}
+
+a:hover {
+    color: var(--hover-color);
 }

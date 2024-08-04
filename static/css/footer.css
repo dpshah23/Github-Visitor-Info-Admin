@@ -1,13 +1,26 @@
 @import './common.css'; /* Import common styles */
 
-.footer {
-    background-color: var(--common-bg-color); /* Same background as navbar */
-    color: var(--text-color);
+/* Footer Styling */
+
+footer .footer{
+    background-color: var(--common-bg-color) !important;
+    color: var(--text-color) !important;
     padding: 20px;
-    max-width: 100%;
-    border-top: 1px solid #0d1117; /* Optional border for separation */
+    border-top: 1px solid var(--border-color) !important;
+}
+footer {
+    background-color: var(--common-bg-color); /* Dark background color */
+    color: var(--text-color); /* Light text color */
+    padding: 20px;
+    border-top: 1px solid var(--border-color); /* Light border for separation */
 }
 
+/* Container for footer content */
+.footer .row {
+    margin: 0;
+}
+
+/* Footer links and social links styling */
 .footer-links,
 .social-links {
     display: flex;
@@ -17,18 +30,31 @@
     padding: 0;
     list-style: none;
     gap: 20px;
-    text-decoration: none;
 }
 
 .footer-links a,
 .social-links a {
-    color: var(--text-color);
-    text-decoration: none;
+    color: var(--text-color); /* Light text color for links */
+    text-decoration: none; /* Remove underline from links */
 }
 
 .footer-links a:hover,
 .social-links a:hover {
-    color: var(--hover-color);
+    color: var(--hover-color); /* Link hover color */
+}
+
+/* Footer contact section */
+.contact-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.mail-link-footer {
+    color: var(--text-color); /* Light color for email link */
+    text-decoration: none; /* Remove underline from email link */
 }
 
 /* Media queries for responsiveness */
@@ -39,16 +65,4 @@
         flex-direction: row;
         text-align: center;
     }
-}
-
-.contact-footer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.mail-link-footer{
-    text-decoration: none;
-    color: var(--text-color);
 }
