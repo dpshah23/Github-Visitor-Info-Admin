@@ -23,8 +23,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the application code to the container
 COPY . .
 
+# Collect static files
+RUN python manage.py collectstatic --noinput
+
 # Expose port 8000
 EXPOSE 8000
 
-# Run the Django development server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Use Gunicorn as the WSGI server
+CMD ["gunicorn", "github_visitor_info_admin.wsgi:application", "--bind", "0.0.0.0:8000"]
