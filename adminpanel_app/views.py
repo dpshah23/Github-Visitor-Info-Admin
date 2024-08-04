@@ -14,7 +14,7 @@ def index(request):
 
     if 'email' not in request.session:
         messages.error(request, 'Login Required')
-        return redirect('/auth/login/')
+        return redirect('/auth/login/?redirection=/home/')
     
     
     today=timezone.now().date()
@@ -36,6 +36,9 @@ def index(request):
     return render(request,'dashboard.html',context)
 
 def get_week_data(request):
+    if 'email' not in request.session:
+        messages.error(request, 'Login Required')
+        return redirect('/auth/login/')
     week_start = request.GET.get('week_start', None)
     if week_start:
         week_start = timezone.make_aware(datetime.strptime(week_start, '%Y-%m-%d'))
@@ -75,7 +78,7 @@ def get_week_data(request):
 def get_link(request):
     if 'email' not in request.session:
         messages.error(request, 'Login Required')
-        return redirect('/auth/login/')
+        return redirect('/auth/login/?redirection=/home/')
     
     unique_link=request.session['unique_link']
 

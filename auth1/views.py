@@ -82,10 +82,23 @@ def validate(request):
 
 
 def login(request):
+    if 'email' in request.session:
+        return redirect('/')
+    
+
     if request.method=="POST":
+        print(request.GET)
+        print(request.GET.get('redirect'))
         email=request.POST.get('email')
         password=request.POST.get('password')
         print(email,password)
+
+        redirect_url=request.GET.get('redirect')
+        redirect_url = request.GET.get('redirect')
+        if isinstance(redirect_url, list):
+            redirect_url = redirect_url[0]
+
+        print(f"Redirect URL: {redirect_url}")  
 
         try:
             user=Users_main.objects.get(email=email)
@@ -106,8 +119,15 @@ def login(request):
                 context={
 
                     }
-
-                response=redirect( '/',context) 
+                if redirect_url:
+                    try:
+                        response = redirect(redirect_url,context)
+                    except Exception as e:
+                        print(f"Redirect URL error: {e}")
+                        response = redirect('/',context)
+                else:
+                    response = redirect('/')
+             
                 response.set_cookie('time', 'true', max_age=15*24*60*60)
                 response.set_cookie('email', email, max_age=15*24*60*60)
                 response.set_cookie('Logged_in', 'true', max_age=15*24*60*60)
@@ -186,6 +206,9 @@ def login(request):
                 print("mail sent")
                         
                     # messages.success(request, 'OTP sent to your email')
+
+                if request.GET.get('redirect'):
+                    return redirect('/auth/validate/?redirection='+request.GET.get('redirection'))
                 return redirect('/auth/validate')
 
 
@@ -194,6 +217,8 @@ def login(request):
     return render(request,'login.html')
 
 def logout(request):
+    if 'email' not in request.session:
+        return redirect('/auth/login/')
     response=redirect('/')
     response.delete_cookie('Logged_in')
     request.session.pop('email')
@@ -203,6 +228,8 @@ def logout(request):
     return response
 
 def signup(request):
+    if 'email' in request.session:
+        return redirect('/')
     if request.method=="POST":
         email=request.POST.get('email')
         password=request.POST.get('password')
