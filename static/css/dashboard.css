@@ -1,5 +1,23 @@
 @import url('./common.css');
 /* General Body Styling */
+
+.welcome-msg{
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.strong{
+    font-size: 35px;
+    font-weight: 600;
+}
+
+a{
+    color: #007BFF;
+    text-decoration: none;
+}
+
 body {
     background-color: var(--common-bg-color);
     color: var(--text-color);
