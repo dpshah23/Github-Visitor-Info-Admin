@@ -1,6 +1,8 @@
 /* Dark mode theme using CSS variables */
 :root {
-    --common-bg-color: #161b22; /* Dark background color for the overall page */
+    
+    --navbar-bg-color: #161b22; /* Dark background color for the navbar */
+    --common-bg-color: #0d1117; /* Dark background color for the overall page */
     --text-color: #c9d1d9; /* Light text color */
     --hover-color: #58a6ff; /* Link hover color */
     --table-bg-color: #1e1e1e; /* Dark background for the table */
@@ -13,6 +15,7 @@
     --selection-bg-color:#ffffff;
     --selection-text-color:#1d1d1f;
 }
+
 
 /* ---------Custom Scroll bar----------- */
 

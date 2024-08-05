@@ -78,7 +78,7 @@ def get_week_data(request):
 def get_link(request):
     if 'email' not in request.session:
         messages.error(request, 'Login Required')
-        return redirect('/auth/login/?redirection=/home/')
+        return redirect('/auth/login/?redirection=/home/get_link/')
     
     unique_link=request.session['unique_link']
 

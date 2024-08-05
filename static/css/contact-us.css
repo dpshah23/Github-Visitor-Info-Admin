@@ -171,7 +171,7 @@ a{
 
 .contactForm .inputBox input[type="submit"] {
     width: 100px;
-    background: #666;
+    background: var(--hover-color);
     color: #ffffff;
     border: none;
     cursor: pointer;
@@ -182,7 +182,7 @@ a{
 }
 
 .contactForm .inputBox input[type="submit"]:hover {
-    background-color: #444;
+    background-color: #333;
 }
 
 /* Media Queries */

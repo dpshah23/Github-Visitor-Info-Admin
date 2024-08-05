@@ -20,13 +20,13 @@ body{
 
 .container {
     width: 100%;
+    max-width: 500px;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
-    margin-top:10px;
-    margin-bottom: 125px;
-    background-color: var(--common-bg-color);
-    height: 89.8vh;
+    align-items: center;
+    margin: 0 auto;
+    padding: 20px;
+    height: auto;
 }
 
 .form {

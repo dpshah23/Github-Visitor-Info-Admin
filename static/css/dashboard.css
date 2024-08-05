@@ -19,9 +19,14 @@ a{
 }
 
 body {
+    background-color: var(--navbar-bg-color);
+    /* color: var(--text-color); */
+    font-family: Arial, sans-serif;
+}
+
+.container-full-dashboard {
     background-color: var(--common-bg-color);
     color: var(--text-color);
-    font-family: Arial, sans-serif;
 }
 ::selection {
     background-color: var(--selection-bg-color);
