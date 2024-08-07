@@ -14,8 +14,8 @@ body{
 }
 
 ::selection {
-    background-color: black;
-    color: #fff;
+    background-color: var(--selection-bg-color);
+    color: var(--selection-text-color);
 }
 
 .container {
@@ -69,8 +69,10 @@ form {
 
 .field input {
     padding: 0 15px;
-    border: 1px solid #333;
+    border: 1px solid #cacaca;
     outline: none;
+    color:#ffffff;
+    background-color: var(--common-bg-color);
 }
 
 .field input:focus {
