@@ -3,3 +3,4 @@ django-jazzmin
 python-dotenv
 whitenoise
 mysql-connector-python
+setuptools
